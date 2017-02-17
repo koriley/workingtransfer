@@ -1,96 +1,149 @@
 <!doctype html>
 <html class="no-js" lang="en" dir="ltr">
-  <head>
+
+<head>
     <meta charset="utf-8">
     <meta http-equiv="x-ua-compatible" content="ie=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Foundation for Sites</title>
     <link rel="stylesheet" href="./css/foundation.css">
     <link rel="stylesheet" href="./css/main.css">
-  </head>
-  <body>
+</head>
 
-    <div class="topBar" style="width:100%; background:black; height:35px; -webkit-app-region: drag; margin:0px; padding:0px; position:fixed; top:0; left:0; right:0;">
-      <div style="position:relative; top:10%; left:0.2%; width:125px; height:25px;">
-          <div class="close" style="background:red; display:inline-block; border-radius:100px; width:18px; height:18px; position:relative; top:10%; left:5%;"></div>
-          <div class="min" style="background:yellow; display:inline-block; border-radius:100px; width:18px; height:18px; position:relative; top:10%; left:7%;"></div>
-          <div class="max" style="background:green; display:inline-block; border-radius:100px; width:18px; height:18px; position:relative; top:10%; left:10%;"></div>
+<body>
 
-      </div>
-  </div>
+    <div class="topBar" style="">
+        <div class="topBarContainer" style="">
+            <div class="close" style=""></div>
+            <div class="min" style=""></div>
+            <div class="max" style=""></div>
 
-  <div class="topSpace" style="height:35px;"></div>
+        </div>
+    </div>
 
-  <div class="expanded row">
-    <div class="medium-3 large-2 columns menuColumn fullHeight" >
-      <ul class=" vertical menu">
-        <li class="create text-center"><h3>Create Project</h3></li>
-        <hr />
-      <li><a href="#">Off-canvas</a></li>
-      <li><a href="#">Example</a></li>
-      <li><a href="#">Vertical</a></li>
-      <li><a href="#">Menu</a></li>
-      <li><a href="#">From</a></li>
-      <li><a href="#">The</a></li>
-      <li><a href="#">Top</a></li>
-    </ul></div>
+    <div class="topSpace" style="height:25px;"></div>
 
-    <div class="medium-9 large-10 columns mother fullHeight" ></div>
-  </div>
+    <div class="expanded row">
+        <div class="medium-3 large-2 columns menuColumn fullHeight">
+            <ul class="create">
+                <li class=" text-center">
+                    <h3>Create Project</h3></li>
+                <hr />
+            </ul>
+            <ul class=" vertical menu projects">
 
+            </ul>
+        </div>
 
+        <div class="medium-9 large-10 columns mother fullHeight">
+            asddasf
+            <div class="list">
 
-
-
-
+            </div>
+        </div>
+    </div>
 
 
-  <script src="./js/jquery-3.1.1.min.js" type="text/javascript" onload="window.$ = window.jQuery = module.exports;"></script>
-  <script src="./js/what-input.js"></script>
-  <script src="./js/foundation.min.js"></script>
 
-  </body>
-  <script type="text/javascript">
-  function getWidthHeight(){
-    var width = jQuery(window).width();
-    var height = jQuery(window).height();
-    jQuery('.width').html(width+'x'+height);
-  }
-//  getWidthHeight();
-   function fullHeight(){
-     var height = jQuery(window).height();
-     jQuery('.fullHeight').height(height-35);
-   }
-   fullHeight();
-  jQuery(window).resize(()=>{
-  //  getWidthHeight();
-  fullHeight();
-  });
 
-          var app = require('electron').remote;
-          var dialog = app.dialog;
-          var fs = require('fs');
 
-          //stop light functions
-          jQuery(".min").on("click", function(e) {
-              var window = app.getCurrentWindow();
-              window.minimize();
-          });
 
-          jQuery(".max").on("click", function(e) {
-              var window = app.getCurrentWindow();
-              if (!window.isMaximized()) {
-                  window.maximize();
-              } else {
-                  window.unmaximize();
+
+
+    <script src="./js/jquery-3.1.1.min.js" type="text/javascript" onload="window.$ = window.jQuery = module.exports;"></script>
+    <script src="./js/what-input.js"></script>
+    <script src="./js/foundation.min.js"></script>
+
+</body>
+<script type="text/javascript">
+    function getWidthHeight() {
+        var width = jQuery(window).width();
+        var height = jQuery(window).height();
+        jQuery('.width').html(width + 'x' + height);
+    }
+    //  getWidthHeight();
+    function fullHeight() {
+        var height = jQuery(window).height();
+        jQuery('.fullHeight').height(height - 25);
+    }
+    fullHeight();
+    jQuery(window).resize(() => {
+        //  getWidthHeight();
+        fullHeight();
+    });
+
+
+
+    var app = require('electron').remote;
+    var dialog = app.dialog;
+    var fs = require('fs');
+
+    //stop light functions
+    jQuery(".min").on("click", function(e) {
+        var window = app.getCurrentWindow();
+        window.minimize();
+    });
+
+    jQuery(".max").on("click", function(e) {
+        var window = app.getCurrentWindow();
+        if (!window.isMaximized()) {
+            window.maximize();
+        } else {
+            window.unmaximize();
+        }
+    });
+
+    jQuery(".close").on("click", function(e) {
+        var window = app.getCurrentWindow();
+        window.close();
+    });
+
+    // function readFile(filepath) {
+    //     var data;
+    //     fs.readFile(filepath, 'utf-8', function(err, data) {
+    //         if (err) {
+    //             alert("An error ocurred reading the file :" + err.message);
+    //             return;
+    //         }
+    //         // Change how to handle the file content
+    //         // console.log("The file content is : " + data);
+    //         return data;
+    //     });
+    //
+    // }
+
+    var getProjects = (filepath) => {
+            return new Promise((resolve, reject) => {
+                fs.readFile(filepath, 'utf-8', function(err, data) {
+                        if (err) {
+                            reject("An error ocurred reading the file :" + err.message);
+                            return;
+                        } else {
+                            resolve(data);
+                        }
+                    });
+                });
+            }
+
+            getProjects("./projects/projects-all.json").then((project) => {
+              var proObj = JSON.parse(project);
+              var newHtml = [];
+              console.log(proObj.menu.length);
+              for(var i = 0; i<= proObj.menu.length-1; i++){
+                newHtml.push('<li>' + proObj.menu[i].name + '</li>');
               }
-          });
+              //console.log(proObj.menu[0].name)
+            jQuery('.projects').html(newHtml);
 
-          jQuery(".close").on("click", function(e) {
-              var window = app.getCurrentWindow();
-              window.close();
-          });
-  // onload="window.$ = window.jQuery = module.exports;"
-          ///
-  </script>
+            }, (errorMessage) => {
+                console.log(errorMessage);
+            });
+            //var projects = readFile("./projects/projects-all.json");
+
+
+
+            // onload="window.$ = window.jQuery = module.exports;"
+            ///
+</script>
+
 </html>

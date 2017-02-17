@@ -1,41 +1,96 @@
-$menuColor: #1A6877;
-$menuHighLight: #289587;
-$motherColor: #EBF4FA;
+$menuColor: #051D29;
+$menuHighLight: #01FBFE;
+$motherColor: #dceff2;
+$redLightWidthHeight: 14px;
 
+.topBar {
+    width: 100%;
+    background: #24292E;
+    height: 25px;
+    -webkit-app-region: drag;
+    margin: 0;
+    padding: 0;
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
 
+    .topBarContainer {
+        position: relative;
+        top: 5%;
+        left: 0.2%;
+        width: 125px;
+        height: 12px;
 
-    .menuColumn {
-        background: $menuColor;
-
-        color: $motherColor;
-        
-
-
-        ul li a {
-            color: $motherColor;
-
-            &:hover {
-                background: $menuHighLight;
-            }
+        .close {
+            background: red;
+            display: inline-block;
+            border-radius: 100px;
+            width: $redLightWidthHeight;
+            height: $redLightWidthHeight;
+            position: relative;
+            top: 10%;
+            left: 5%;
         }
 
-        ul li h3 {
+        .min {
+            background: yellow;
+            display: inline-block;
+            border-radius: 100px;
+            width: $redLightWidthHeight;
+            height: $redLightWidthHeight;
+            position: relative;
+            top: 10%;
+            left: 7%;
+        }
+
+        .max {
+            background: green;
+            display: inline-block;
+            border-radius: 100px;
+            width: $redLightWidthHeight;
+            height: $redLightWidthHeight;
+            position: relative;
+            top: 10%;
+            left: 10%;
+        }
+    }
+}
+
+.menuColumn {
+    background: url('../img/cartographer.png') $menuColor;
+    color: $menuHighLight;
+
+    ul li  {
+        color: $menuHighLight;
+        padding:10px;
+        border-radius: 17px;
+        &:hover {
+            background: $menuHighLight;
+            color:$menuColor;
+            box-shadow: 0px 0px 10px 3px $menuHighLight;
+        }
+    }
+
+    .create {
+      list-style: none;
+        li h3 {
             margin-top: 5px;
             margin-bottom: -13px;
-            border: 1px solid #13606d;
-            box-shadow: 2px 2px 5px #13606d;
+            border: 1px solid $menuHighLight;
+            background: $menuColor;
 
             &:active {
-                box-shadow: 2px 2px 5px #13606d inset;
-                text-shadow: 3px 3px 15px $menuHighLight;
+                box-shadow: 4px 4px 5px #13606d inset;
+                //text-shadow: 3px 3px 15px $menuHighLight;
             }
         }
     }
+}
 
-    .mother {
-        background: $motherColor;
-    }
-
+.mother {
+    background: $motherColor;
+}
 
 .fullHeight {
     display: inline-block;

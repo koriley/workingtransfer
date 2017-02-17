@@ -1,0 +1,9 @@
+{
+  "menu": [{
+    "url": "www.something.com",
+    "name": "something"
+  }, {
+    "url": "www.rangerboats.com",
+    "name": "ranger"
+  }]
+}
