@@ -1,0 +1,21 @@
+.menuColumn {
+  background: #1A6877;
+  color: #EBF4FA; }
+  .menuColumn ul li a {
+    color: #EBF4FA; }
+    .menuColumn ul li a:hover {
+      background: #289587; }
+  .menuColumn ul li h3 {
+    margin-top: 5px;
+    margin-bottom: -13px;
+    border: 1px solid #13606d;
+    box-shadow: 2px 2px 5px #13606d; }
+    .menuColumn ul li h3:active {
+      box-shadow: 2px 2px 5px #13606d inset;
+      text-shadow: 3px 3px 15px #289587; }
+
+.mother {
+  background: #EBF4FA; }
+
+.fullHeight {
+  display: inline-block; }

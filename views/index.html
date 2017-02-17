@@ -1,0 +1,96 @@
+<!doctype html>
+<html class="no-js" lang="en" dir="ltr">
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="x-ua-compatible" content="ie=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Foundation for Sites</title>
+    <link rel="stylesheet" href="./css/foundation.css">
+    <link rel="stylesheet" href="./css/main.css">
+  </head>
+  <body>
+
+    <div class="topBar" style="width:100%; background:black; height:35px; -webkit-app-region: drag; margin:0px; padding:0px; position:fixed; top:0; left:0; right:0;">
+      <div style="position:relative; top:10%; left:0.2%; width:125px; height:25px;">
+          <div class="close" style="background:red; display:inline-block; border-radius:100px; width:18px; height:18px; position:relative; top:10%; left:5%;"></div>
+          <div class="min" style="background:yellow; display:inline-block; border-radius:100px; width:18px; height:18px; position:relative; top:10%; left:7%;"></div>
+          <div class="max" style="background:green; display:inline-block; border-radius:100px; width:18px; height:18px; position:relative; top:10%; left:10%;"></div>
+
+      </div>
+  </div>
+
+  <div class="topSpace" style="height:35px;"></div>
+
+  <div class="expanded row">
+    <div class="medium-3 large-2 columns menuColumn fullHeight" >
+      <ul class=" vertical menu">
+        <li class="create text-center"><h3>Create Project</h3></li>
+        <hr />
+      <li><a href="#">Off-canvas</a></li>
+      <li><a href="#">Example</a></li>
+      <li><a href="#">Vertical</a></li>
+      <li><a href="#">Menu</a></li>
+      <li><a href="#">From</a></li>
+      <li><a href="#">The</a></li>
+      <li><a href="#">Top</a></li>
+    </ul></div>
+
+    <div class="medium-9 large-10 columns mother fullHeight" ></div>
+  </div>
+
+
+
+
+
+
+
+
+  <script src="./js/jquery-3.1.1.min.js" type="text/javascript" onload="window.$ = window.jQuery = module.exports;"></script>
+  <script src="./js/what-input.js"></script>
+  <script src="./js/foundation.min.js"></script>
+
+  </body>
+  <script type="text/javascript">
+  function getWidthHeight(){
+    var width = jQuery(window).width();
+    var height = jQuery(window).height();
+    jQuery('.width').html(width+'x'+height);
+  }
+//  getWidthHeight();
+   function fullHeight(){
+     var height = jQuery(window).height();
+     jQuery('.fullHeight').height(height-35);
+   }
+   fullHeight();
+  jQuery(window).resize(()=>{
+  //  getWidthHeight();
+  fullHeight();
+  });
+
+          var app = require('electron').remote;
+          var dialog = app.dialog;
+          var fs = require('fs');
+
+          //stop light functions
+          jQuery(".min").on("click", function(e) {
+              var window = app.getCurrentWindow();
+              window.minimize();
+          });
+
+          jQuery(".max").on("click", function(e) {
+              var window = app.getCurrentWindow();
+              if (!window.isMaximized()) {
+                  window.maximize();
+              } else {
+                  window.unmaximize();
+              }
+          });
+
+          jQuery(".close").on("click", function(e) {
+              var window = app.getCurrentWindow();
+              window.close();
+          });
+  // onload="window.$ = window.jQuery = module.exports;"
+          ///
+  </script>
+</html>

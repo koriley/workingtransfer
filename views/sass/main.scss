@@ -1,0 +1,42 @@
+$menuColor: #1A6877;
+$menuHighLight: #289587;
+$motherColor: #EBF4FA;
+
+
+
+    .menuColumn {
+        background: $menuColor;
+
+        color: $motherColor;
+        
+
+
+        ul li a {
+            color: $motherColor;
+
+            &:hover {
+                background: $menuHighLight;
+            }
+        }
+
+        ul li h3 {
+            margin-top: 5px;
+            margin-bottom: -13px;
+            border: 1px solid #13606d;
+            box-shadow: 2px 2px 5px #13606d;
+
+            &:active {
+                box-shadow: 2px 2px 5px #13606d inset;
+                text-shadow: 3px 3px 15px $menuHighLight;
+            }
+        }
+    }
+
+    .mother {
+        background: $motherColor;
+    }
+
+
+.fullHeight {
+    display: inline-block;
+}
