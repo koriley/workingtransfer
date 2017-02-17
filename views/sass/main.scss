@@ -5,7 +5,7 @@ $redLightWidthHeight: 14px;
 
 .topBar {
     width: 100%;
-    background: #24292E;
+    background: $menuColor;
     height: 25px;
     -webkit-app-region: drag;
     margin: 0;
@@ -61,19 +61,21 @@ $redLightWidthHeight: 14px;
     background: url('../img/cartographer.png') $menuColor;
     color: $menuHighLight;
 
-    ul li  {
+    .projects li {
         color: $menuHighLight;
-        padding:10px;
+        padding: 10px;
         border-radius: 17px;
+
         &:hover {
             background: $menuHighLight;
-            color:$menuColor;
-            box-shadow: 0px 0px 10px 3px $menuHighLight;
+            color: $menuColor;
+            box-shadow: 0 0 10px 3px $menuHighLight;
         }
     }
 
     .create {
-      list-style: none;
+        list-style: none;
+
         li h3 {
             margin-top: 5px;
             margin-bottom: -13px;
@@ -94,4 +96,29 @@ $redLightWidthHeight: 14px;
 
 .fullHeight {
     display: inline-block;
+}
+
+#creator {
+    background: url('../img/cartographer.png') $menuColor;
+    color: $menuHighLight;
+
+    label {
+        color: $menuHighLight;
+    }
+}
+
+.glow {
+    background: $menuHighLight;
+    color: $menuColor;
+    box-shadow: 0 0 10px 3px $menuHighLight;
+    &:hover, &:focus, &:visited{
+      background: $menuHighLight;
+      color: $menuColor;
+    }
+    &:active{
+      box-shadow: 4px 4px 5px #13606d inset;
+    }
+}
+.error{
+  color:red !important;
 }

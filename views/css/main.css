@@ -1,6 +1,6 @@
 .topBar {
   width: 100%;
-  background: #24292E;
+  background: #051D29;
   height: 25px;
   -webkit-app-region: drag;
   margin: 0;
@@ -46,14 +46,14 @@
 .menuColumn {
   background: url("../img/cartographer.png") #051D29;
   color: #01FBFE; }
-  .menuColumn ul li {
+  .menuColumn .projects li {
     color: #01FBFE;
     padding: 10px;
     border-radius: 17px; }
-    .menuColumn ul li:hover {
+    .menuColumn .projects li:hover {
       background: #01FBFE;
       color: #051D29;
-      box-shadow: 0px 0px 10px 3px #01FBFE; }
+      box-shadow: 0 0 10px 3px #01FBFE; }
   .menuColumn .create {
     list-style: none; }
     .menuColumn .create li h3 {
@@ -69,3 +69,22 @@
 
 .fullHeight {
   display: inline-block; }
+
+#creator {
+  background: url("../img/cartographer.png") #051D29;
+  color: #01FBFE; }
+  #creator label {
+    color: #01FBFE; }
+
+.glow {
+  background: #01FBFE;
+  color: #051D29;
+  box-shadow: 0 0 10px 3px #01FBFE; }
+  .glow:hover, .glow:focus, .glow:visited {
+    background: #01FBFE;
+    color: #051D29; }
+  .glow:active {
+    box-shadow: 4px 4px 5px #13606d inset; }
+
+.error {
+  color: red !important; }

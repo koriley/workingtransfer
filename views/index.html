@@ -26,8 +26,9 @@
     <div class="expanded row">
         <div class="medium-3 large-2 columns menuColumn fullHeight">
             <ul class="create">
-                <li class=" text-center">
-                    <h3>Create Project</h3></li>
+                <li class="creator text-center">
+                    <h3 data-open="creator">Create Project</h3>
+                  </li>
                 <hr />
             </ul>
             <ul class=" vertical menu projects">
@@ -45,8 +46,32 @@
 
 
 
+<!-- create project Modal -->
+<div class="tiny reveal" id="creator" data-reveal>
+  <form>
+  <div class="row">
+    <div class="medium-12 large-12 columns">
+      <label id="proName">Name of Project
+        <input type="text" name="projectName" placeholder="">
+      </label>
 
 
+      <label id="proUrl">URL for project
+        <input type="text" name="projectUrl" placeholder="">
+      </label>
+
+  </div>
+</form>
+  <button class="close-button" data-close aria-label="Close modal" type="button">
+    <span aria-hidden="true">&times;</span>
+  </button>
+  <div class="text-right" style="width:100%;">
+    <button class="button glow projectCreate" type="button">
+      SAVE
+    </button>
+  </div>
+
+</div>
 
 
 
@@ -56,6 +81,7 @@
 
 </body>
 <script type="text/javascript">
+ $(document).foundation();
     function getWidthHeight() {
         var width = jQuery(window).width();
         var height = jQuery(window).height();
@@ -72,7 +98,45 @@
         fullHeight();
     });
 
+    jQuery(".projectCreate").on("click", function(){
 
+      readAFile("./projects/projects-all.json").then((project) => {
+        var proObj = JSON.parse(project);
+        var newHtml = [];
+        var newArray=[];
+        //console.log(proObj.menu.length);
+        var name = jQuery('input[name=projectName]').val();
+        var url = jQuery('input[name=projectUrl]').val();
+
+        //console.log(name);
+        if(!name){
+          jQuery('#proName').addClass('error');
+          return;
+        }else if(!url){
+          jQuery('#proUrl').addClass('error');
+          return;
+        }
+        for(var i = 0; i<= proObj.menu.length-1; i++){
+          newHtml.push('<li>' + proObj.menu[i].name + '</li>');
+          newArray.push({
+            "name":proObj.menu[i].name,
+            "url":proObj.menu[i].url
+          });
+        }
+        newArray.push({
+          "name":name,
+          "url":url
+        });
+        newHtml.push('<li>' + name + '</li>');
+        console.log(newArray);
+      jQuery('.projects').html(newHtml);
+
+      }, (errorMessage) => {
+          console.log(errorMessage);
+      });
+      jQuery('#proName').removeClass('error');
+      jQuery('#proUrl').removeClass('error');
+    });
 
     var app = require('electron').remote;
     var dialog = app.dialog;
@@ -112,7 +176,7 @@
     //
     // }
 
-    var getProjects = (filepath) => {
+    var readAFile = (filepath) => {
             return new Promise((resolve, reject) => {
                 fs.readFile(filepath, 'utf-8', function(err, data) {
                         if (err) {
@@ -125,7 +189,7 @@
                 });
             }
 
-            getProjects("./projects/projects-all.json").then((project) => {
+            readAFile("./projects/projects-all.json").then((project) => {
               var proObj = JSON.parse(project);
               var newHtml = [];
               console.log(proObj.menu.length);
@@ -138,6 +202,7 @@
             }, (errorMessage) => {
                 console.log(errorMessage);
             });
+
             //var projects = readFile("./projects/projects-all.json");
 
 
