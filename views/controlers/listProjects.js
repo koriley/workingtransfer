@@ -10,8 +10,8 @@ readAFile("./projects/projects-all.json").then((project) => {
 
     //console.log(length);
     for (var i = 0; i <= length; i++) {
-      newHtml.push('<li id="test" class="project">' + proObj.menu[i].name +
-        '</li>');
+      newHtml.push('<li id="test" class="project" dataURL = "' + proObj.menu[
+        i].url + '">' + proObj.menu[i].name + '</li>');
     }
   }
 

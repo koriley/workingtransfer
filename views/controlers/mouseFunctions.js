@@ -4,9 +4,12 @@ var rightClick = (event) => {
     if (clickType === 3) {
       var x = event.clientX;
       var y = event.clientY;
+
       var id = (event.target || event.srcElement).id;
       var myClass = (event.target || event.srcElement).className;
-      //console.log("id = " + id + " class = " + myClass);
+      var proName = (event.srcElement).innerHTML;
+
+
       resolve({
         "x": x,
         "y": y,
@@ -15,7 +18,7 @@ var rightClick = (event) => {
       });
     } else {
       //lets look and see if any dialog boxes are floating around and kill them
-      destroyDialogBox("newDialog");
+      destroyDialogBox("newDialog", event);
 
     }
   });
@@ -32,7 +35,7 @@ var createDialogBox = (obj) => {
   return new Promise((resolve, reject) => {
     //lets remove any instances first
 
-    destroyDialogBox("newDialog");
+    destroyDialogBox("newDialog", event);
     var x = obj.x + 5;
     var y = obj.y + 5;
     var body = document.getElementsByTagName('body')[0];
@@ -44,6 +47,9 @@ var createDialogBox = (obj) => {
     for (var i = 0; i <= len; i++) {
       var li = document.createElement('li');
       li.innerHTML = obj.items[i].name;
+      li.className = "contextMenu"
+      li.target.onlick = obj.items[i].url;
+      //console.log(obj.items[i].url);
       ul.appendChild(li);
     }
 
@@ -61,11 +67,15 @@ var createDialogBox = (obj) => {
   });
 }
 
-var destroyDialogBox = (className) => {
+var destroyDialogBox = (className, event) => {
   return new Promise((resolve, reject) => {
     var toRemove = document.getElementsByClassName(className);
     if (toRemove.length > 0) {
-      toRemove[0].parentNode.removeChild(toRemove[0]);
+      console.log(event);
+      // console.log(toRemove);
+      if (event.target.className != "contextMenu") {
+        toRemove[0].parentNode.removeChild(toRemove[0]);
+      }
 
     }
 
