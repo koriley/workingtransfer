@@ -28,7 +28,7 @@
             <ul class="create">
                 <li class="creator text-center">
                     <h3 data-open="creator">Create Project</h3>
-                  </li>
+                </li>
                 <hr />
             </ul>
             <ul class=" vertical menu projects">
@@ -46,42 +46,43 @@
 
 
 
-<!-- create project Modal -->
-<div class="tiny reveal" id="creator" data-reveal>
-  <form>
-  <div class="row">
-    <div class="medium-12 large-12 columns">
-      <label id="proName">Name of Project
+    <!-- create project Modal -->
+    <div class="tiny reveal" id="creator" data-reveal>
+        <form>
+            <div class="row">
+                <div class="medium-12 large-12 columns">
+                    <label id="proName">Name of Project
         <input type="text" name="projectName" placeholder="">
       </label>
 
 
-      <label id="proUrl">URL for project
+                    <label id="proUrl">URL for project
         <input type="text" name="projectUrl" placeholder="">
       </label>
 
-  </div>
-</form>
-  <button class="close-button" data-close aria-label="Close modal" type="button">
+                </div>
+        </form>
+        <button class="close-button" data-close aria-label="Close modal" type="button">
     <span aria-hidden="true">&times;</span>
   </button>
-  <div class="text-right" style="width:100%;">
-    <button class="button glow projectCreate" type="button">
+        <div class="text-right" style="width:100%;">
+            <button class="button glow projectCreate" type="button">
       SAVE
     </button>
-  </div>
+        </div>
 
-</div>
+        </div>
 
 
 
-    <script src="./js/jquery-3.1.1.min.js" type="text/javascript" onload="window.$ = window.jQuery = module.exports;"></script>
-    <script src="./js/what-input.js"></script>
-    <script src="./js/foundation.min.js"></script>
+        <script src="./js/jquery-3.1.1.min.js" type="text/javascript" onload="window.$ = window.jQuery = module.exports;"></script>
+        <script src="./js/what-input.js"></script>
+        <script src="./js/foundation.min.js"></script>
 
 </body>
 <script type="text/javascript">
- $(document).foundation();
+    $(document).foundation();
+
     function getWidthHeight() {
         var width = jQuery(window).width();
         var height = jQuery(window).height();
@@ -98,44 +99,81 @@
         fullHeight();
     });
 
-    jQuery(".projectCreate").on("click", function(){
+    jQuery(".projectCreate").on("click", function() {
 
-      readAFile("./projects/projects-all.json").then((project) => {
-        var proObj = JSON.parse(project);
-        var newHtml = [];
-        var newArray=[];
-        //console.log(proObj.menu.length);
-        var name = jQuery('input[name=projectName]').val();
-        var url = jQuery('input[name=projectUrl]').val();
+        readAFile("./projects/projects-all.json").then((project) => {
+          if(project !=''){
+//console.log("ifProject");
+            var proObj = JSON.parse(project);
+          }
+            var newHtml = [];
+            var newArray = [];
+            var newObject = {};
+            //console.log(proObj.menu.length);
+            var name = jQuery('input[name=projectName]').val();
+            var url = jQuery('input[name=projectUrl]').val();
 
-        //console.log(name);
-        if(!name){
-          jQuery('#proName').addClass('error');
-          return;
-        }else if(!url){
-          jQuery('#proUrl').addClass('error');
-          return;
-        }
-        for(var i = 0; i<= proObj.menu.length-1; i++){
-          newHtml.push('<li>' + proObj.menu[i].name + '</li>');
-          newArray.push({
-            "name":proObj.menu[i].name,
-            "url":proObj.menu[i].url
-          });
-        }
-        newArray.push({
-          "name":name,
-          "url":url
+            //console.log(name);
+            if (!name) {
+                jQuery('#proName').addClass('error');
+                return;
+            } else if (!url) {
+                jQuery('#proUrl').addClass('error');
+                return;
+            }
+            if(proObj){
+//console.log("ifporObj");
+            var arrayLength = proObj.menu.length - 1;
+          }else{
+            arrayLength = -1;
+          //  console.log("here");
+          }
+          //console.log(arrayLength);
+            if (arrayLength>=0) {
+            //  console.log("for");
+                for (var i = 0; i <= arrayLength; i++) {
+                    newHtml.push('<li>' + proObj.menu[i].name + '</li>');
+                    newArray.push({
+                        "name": proObj.menu[i].name,
+                        "url": proObj.menu[i].url
+                    });
+                }
+            }
+            newArray.push({
+                "name": name,
+                "url": url
+            });
+            newHtml.push('<li>' + name + '</li>');
+            //console.log(newArray);
+            writeObj = {
+                "menu": newArray
+            }
+            JSON.stringify(writeObj, undefined, 2);
+          //  console.log(writeObj);
+            jQuery('.list').html(JSON.stringify(writeObj, undefined, 2));
+
+            writeFile("./projects/projects-all.json", JSON.stringify(writeObj, undefined, 2)).then((reply) => {
+                if (error) {
+                    alert(error);
+                    return;
+                }
+
+            }, (errorMessage) => {
+                console.log(errorMessage);
+            });
+            jQuery('.projects').html(newHtml);
+            jQuery('#proName').removeClass('error');
+            jQuery('#proUrl').removeClass('error');
+            jQuery('input[name=projectName]').val('');
+            jQuery('input[name=projectUrl]').val('');
+            jQuery('#creator').foundation('close');
+            return;
+
+
+        }, (errorMessage) => {
+            console.log(errorMessage);
         });
-        newHtml.push('<li>' + name + '</li>');
-        console.log(newArray);
-      jQuery('.projects').html(newHtml);
 
-      }, (errorMessage) => {
-          console.log(errorMessage);
-      });
-      jQuery('#proName').removeClass('error');
-      jQuery('#proUrl').removeClass('error');
     });
 
     var app = require('electron').remote;
@@ -177,38 +215,56 @@
     // }
 
     var readAFile = (filepath) => {
-            return new Promise((resolve, reject) => {
-                fs.readFile(filepath, 'utf-8', function(err, data) {
-                        if (err) {
-                            reject("An error ocurred reading the file :" + err.message);
-                            return;
-                        } else {
-                            resolve(data);
-                        }
-                    });
-                });
-            }
-
-            readAFile("./projects/projects-all.json").then((project) => {
-              var proObj = JSON.parse(project);
-              var newHtml = [];
-              console.log(proObj.menu.length);
-              for(var i = 0; i<= proObj.menu.length-1; i++){
-                newHtml.push('<li>' + proObj.menu[i].name + '</li>');
-              }
-              //console.log(proObj.menu[0].name)
-            jQuery('.projects').html(newHtml);
-
-            }, (errorMessage) => {
-                console.log(errorMessage);
+        return new Promise((resolve, reject) => {
+            fs.readFile(filepath, 'utf-8', function(err, data) {
+                if (err) {
+                    reject("An error ocurred reading the file :" + err.message);
+                    return;
+                } else {
+                    resolve(data);
+                }
             });
+        });
+    }
 
-            //var projects = readFile("./projects/projects-all.json");
+    var writeFile = (filepath, data) => {
+        return new Promise((resolve, reject) => {
+          fs.writeFile(filepath, data, (err) => {
+              if (err) {
+                  reject(err);
+              }
+          });
+        })
+    }
+
+    readAFile("./projects/projects-all.json").then((project) => {
+      if(project!=''){
+        //console.log("readin file at start");
+        var proObj = JSON.parse(project);
+        //console.log(proObj);
+        var newHtml = [];
+        //console.log(proObj.menu.length);
+        var length = proObj.menu.length - 1;
+
+//console.log(length);
+        for (var i = 0; i <= length; i++) {
+            newHtml.push('<li>' + proObj.menu[i].name + '</li>');
+        }
+      }
+
+        //console.log(proObj.menu[0].name)
+        jQuery('.projects').html(newHtml);
+
+    }, (errorMessage) => {
+        console.log(errorMessage);
+    });
+
+    //var projects = readFile("./projects/projects-all.json");
 
 
 
-            // onload="window.$ = window.jQuery = module.exports;"
-            ///
+    // onload="window.$ = window.jQuery = module.exports;"
+    ///
 </script>
 
 </html>

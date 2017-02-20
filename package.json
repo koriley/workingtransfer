@@ -9,7 +9,8 @@
   "author": "",
   "license": "ISC",
   "dependencies": {
-    "electron": "^1.4.15"
+    "electron": "^1.4.15",
+    "electron-context-menu": "^0.8.0"
   },
   "devDependencies": {
     "browser-sync": "^2.18.8",
