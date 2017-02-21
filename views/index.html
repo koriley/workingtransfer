@@ -105,6 +105,7 @@
     <script src="./js/what-input.js"></script>
     <script src="./js/foundation.min.js"></script>
     <script src="./models/fileSystem.js"></script>
+    <script src="./models/jsonMethods.js"></script>
     <script src="./controlers/projectCreate.js"></script>
     <script src="./controlers/listProjects.js"></script>
     <script src="./controlers/mouseFunctions.js"></script>
@@ -151,22 +152,29 @@
             }
             jQuery(".editButton").each(function() {
                 jQuery(this).click(function() {
-                    var parentName = jQuery(this).parents(".project").attr("data-name");
-                    var parentUrl = jQuery(this).parents(".project").attr('data-url');
+                  var parentName = '';
+                  var parentUrl = '';
+                     parentName = jQuery(this).parents(".project").attr("data-name");
+                     parentUrl = jQuery(this).parents(".project").attr('data-url');
                     jQuery(".newDialog").hide();
                     jQuery('input[name=projectNameEdit]').val(parentName);
                     jQuery('input[name=projectUrlEdit]').val(parentUrl);
                     jQuery('#editor').foundation('open');
-                    jQuery('.projectEdit').on('click', function(){
-                      var newName = jQuery('input[name=projectNameEdit]').val();
-                      var newUrl = jQuery('input[name=projectUrlEdit]').val()
-                      var editObj = {
-                        "oldName":parentName,
-                        "oldUrl":parentUrl,
-                        "newName":newName,
-                        "newUrl":newUrl
-                      }
-                      console.log(JSON.stringify(editObj,undefined,2));
+                    jQuery('.projectEdit').on('click', function() {
+                        var newName = jQuery('input[name=projectNameEdit]').val();
+                        var newUrl = jQuery('input[name=projectUrlEdit]').val()
+                        if(!newName) newName = parentName;
+                        if(!newUrl)  newUrl = parentUrl;
+                        var editObj = {
+                            "oldName": parentName,
+                            "oldUrl": parentUrl,
+                            "newName": newName,
+                            "newUrl": newUrl
+                        }
+                        readAFile("./projects/projects-all.json").then((project) => {
+                        //  console.log(JSON.stringify(project,undefined,2));
+                            objectUpdate(editObj, project);
+                        });
                     });
 
                     //console.log(parentName+" - "+parentUrl);
