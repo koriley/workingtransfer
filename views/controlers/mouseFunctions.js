@@ -8,8 +8,6 @@ var rightClick = (event) => {
       var id = (event.target || event.srcElement).id;
       var myClass = (event.target || event.srcElement).className;
       var proName = (event.srcElement).innerHTML;
-
-
       resolve({
         "x": x,
         "y": y,
@@ -41,25 +39,29 @@ var createDialogBox = (obj) => {
     var body = document.getElementsByTagName('body')[0];
     var div = document.createElement('div');
     var ul = document.createElement('ul');
+    var parent = obj.id;
     div.className = "newDialog"
     div.appendChild(ul);
     var len = obj.items.length - 1;
     for (var i = 0; i <= len; i++) {
       var li = document.createElement('li');
       li.innerHTML = obj.items[i].name;
-      li.className = "contextMenu"
-      li.target.onlick = obj.items[i].url;
+      li.classList.add("contextMenu");
+      if (obj.items[i].class) {
+        li.classList.add(obj.items[i].class);
+      }
+
       //console.log(obj.items[i].url);
       ul.appendChild(li);
     }
 
-    div.style.background = "grey";
+    // div.style.background = "grey";
     div.style.position = "absolute";
     div.style.top = y + "px";
     div.style.left = x + "px";
     div.style.display = "none"
     div.style.opacity = 0.1
-    body.appendChild(div);
+    document.getElementById(parent).appendChild(div);
     //console.log(len);
     unfade(div);
     resolve("cdb200");
@@ -73,7 +75,7 @@ var destroyDialogBox = (className, event) => {
     if (toRemove.length > 0) {
       console.log(event);
       // console.log(toRemove);
-      if (event.target.className != "contextMenu") {
+      if (event.target.classList[0] != "contextMenu") {
         toRemove[0].parentNode.removeChild(toRemove[0]);
       }
 

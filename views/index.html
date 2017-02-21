@@ -111,17 +111,27 @@
                 createDialogBox({
                   x:data.x,
                   y:data.y,
+                  id:data.id,
                     items: [
                     {
-                      "name":"edit",
-                      "url":jQuery('#creator').foundation('open')
+                      "name":"Edit",
+                      "url":"",
+                      "class":"editButton"
+                    },{
+                      "name":"Delete",
+                      "url":"",
+                      "class":"deleteButton"
                     }]
                 });
             }
         }, (errorMessage) => {
             console.log(errorMessage);
         });
-    }
+    };
+
+    jQuery("editButton").on('click', ()=>{
+
+    })
 
 
     var app = require('electron').remote;

@@ -2,6 +2,7 @@ $menuColor: #051D29;
 $menuHighLight: #01FBFE;
 $motherColor: #dceff2;
 $redLightWidthHeight: 14px;
+$contextMenuBGC:#F2F2F2;
 
 .topBar {
     width: 100%;
@@ -121,4 +122,29 @@ $redLightWidthHeight: 14px;
 }
 .error{
   color:red !important;
+}
+
+.newDialog{
+  background: $contextMenuBGC;
+  color:black;
+  width:100px;
+  ul{
+    list-style: none;
+    color:black;
+    li{
+      width:100%;
+      text-align:left !important;
+      padding:0px !important;
+      padding-left:15px !important;
+      color:black !important;
+      &:hover{
+        background:blue !important;
+        color:white !important;
+        box-shadow:0px 0px 0px blue !important;
+        padding: 0px !important;
+        border-radius: 0px !important;
+      }
+    }
+  }
+
 }
