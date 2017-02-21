@@ -37,8 +37,9 @@
         </div>
 
         <div class="medium-9 large-10 columns mother fullHeight">
-            asddasf<div class="editButton" id="test">
-test div
+            asddasf
+            <div class="editButton" id="test">
+                test div
             </div>
             <div class="list">
 
@@ -56,34 +57,57 @@ test div
                     <label id="proName">Name of Project
         <input type="text" name="projectName" placeholder="">
       </label>
-
-
                     <label id="proUrl">URL for project
         <input type="text" name="projectUrl" placeholder="">
       </label>
-
                 </div>
-        </form>
-        <button class="close-button" data-close aria-label="Close modal" type="button">
+
+                <button class="close-button" data-close aria-label="Close modal" type="button">
     <span aria-hidden="true">&times;</span>
   </button>
-        <div class="text-right" style="width:100%;">
-            <button class="button glow projectCreate" type="button">
+                <div class="text-right" style="width:100%;">
+                    <button class="button glow projectCreate" type="button">
       SAVE
     </button>
-        </div>
+                </div>
+            </div>
+        </form>
+    </div>
 
-        </div>
+    <!-- edit project Modal -->
+    <div class="tiny reveal" id="editor" data-reveal>
+        <form>
+            <div class="row">
+                <div class="medium-12 large-12 columns">
+                    <label id="proName">Name of Project
+        <input type="text" name="projectNameEdit" placeholder="">
+      </label>
+                    <label id="proUrl">URL for project
+        <input type="text" name="projectUrlEdit" placeholder="">
+      </label>
+                </div>
+
+                <button class="close-button" data-close aria-label="Close modal" type="button">
+    <span aria-hidden="true">&times;</span>
+  </button>
+                <div class="text-right" style="width:100%;">
+                    <button class="button glow projectEdit" type="button">
+      SAVE
+    </button>
+                </div>
+            </div>
+        </form>
+    </div>
 
 
 
-        <script src="./js/jquery-3.1.1.min.js" type="text/javascript" onload="window.$ = window.jQuery = module.exports;"></script>
-        <script src="./js/what-input.js"></script>
-        <script src="./js/foundation.min.js"></script>
-        <script src="./models/fileSystem.js"></script>
-        <script src="./controlers/projectCreate.js"></script>
-        <script src="./controlers/listProjects.js"></script>
-        <script src="./controlers/mouseFunctions.js"></script>
+    <script src="./js/jquery-3.1.1.min.js" type="text/javascript" onload="window.$ = window.jQuery = module.exports;"></script>
+    <script src="./js/what-input.js"></script>
+    <script src="./js/foundation.min.js"></script>
+    <script src="./models/fileSystem.js"></script>
+    <script src="./controlers/projectCreate.js"></script>
+    <script src="./controlers/listProjects.js"></script>
+    <script src="./controlers/mouseFunctions.js"></script>
 
 </body>
 <script type="text/javascript">
@@ -127,10 +151,25 @@ test div
             }
             jQuery(".editButton").each(function() {
                 jQuery(this).click(function() {
-                    var parentName = jQuery(this).parents(".project").html();
-                    var parentUrl = jQuery(this).parents(".project").attr('id');
-                    
-                    console.log(parentName+" - "+parentUrl);
+                    var parentName = jQuery(this).parents(".project").attr("data-name");
+                    var parentUrl = jQuery(this).parents(".project").attr('data-url');
+                    jQuery(".newDialog").hide();
+                    jQuery('input[name=projectNameEdit]').val(parentName);
+                    jQuery('input[name=projectUrlEdit]').val(parentUrl);
+                    jQuery('#editor').foundation('open');
+                    jQuery('.projectEdit').on('click', function(){
+                      var newName = jQuery('input[name=projectNameEdit]').val();
+                      var newUrl = jQuery('input[name=projectUrlEdit]').val()
+                      var editObj = {
+                        "oldName":parentName,
+                        "oldUrl":parentUrl,
+                        "newName":newName,
+                        "newUrl":newUrl
+                      }
+                      console.log(JSON.stringify(editObj,undefined,2));
+                    });
+
+                    //console.log(parentName+" - "+parentUrl);
                 });
             });
         }, (errorMessage) => {
@@ -172,7 +211,7 @@ test div
         jQuery(".project").each(function() {
             jQuery(this).mousedown(function(e) {
                 if (e.which === 3) {
-                    console.log("yep");
+                    //console.log("yep");
                 }
             });
         });

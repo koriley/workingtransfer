@@ -70,10 +70,10 @@
 .fullHeight {
   display: inline-block; }
 
-#creator {
+#creator, #editor {
   background: url("../img/cartographer.png") #051D29;
   color: #01FBFE; }
-  #creator label {
+  #creator label, #editor label {
     color: #01FBFE; }
 
 .glow {

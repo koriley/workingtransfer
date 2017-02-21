@@ -99,7 +99,7 @@ $contextMenuBGC:#F2F2F2;
     display: inline-block;
 }
 
-#creator {
+#creator, #editor {
     background: url('../img/cartographer.png') $menuColor;
     color: $menuHighLight;
 
@@ -139,7 +139,7 @@ $contextMenuBGC:#F2F2F2;
       padding:0px !important;
 
       color:black !important;
-      
+
       border-radius: 0px !important;
       &:hover{
         background:blue !important;

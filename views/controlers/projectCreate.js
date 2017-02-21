@@ -31,8 +31,10 @@ jQuery(".projectCreate").on("click", function() {
     if (arrayLength >= 0) {
       //  console.log("for");
       for (var i = 0; i <= arrayLength; i++) {
-        newHtml.push('<li class="project">' + proObj.menu[i].name +
-          '</li>');
+        newHtml.push('<li class="project" data-url="' + proObj.menu[i].url +
+          '" data-name="' + proObj.menu[i].name + '" id="' + proObj.menu[
+            i].url +
+          '">' + proObj.menu[i].name + '</li>');
         newArray.push({
           "name": proObj.menu[i].name,
           "url": proObj.menu[i].url
