@@ -92,16 +92,18 @@
 .newDialog {
   background: #F2F2F2;
   color: black;
-  width: 100px; }
+  width: 150px;
+  border-radius: 2px; }
   .newDialog ul {
     list-style: none;
-    color: black; }
+    color: black;
+    margin-left: 0px; }
     .newDialog ul li {
       width: 100%;
       text-align: left !important;
       padding: 0px !important;
-      padding-left: 15px !important;
-      color: black !important; }
+      color: black !important;
+      border-radius: 0px !important; }
       .newDialog ul li:hover {
         background: blue !important;
         color: white !important;

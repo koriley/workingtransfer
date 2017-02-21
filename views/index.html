@@ -37,7 +37,9 @@
         </div>
 
         <div class="medium-9 large-10 columns mother fullHeight">
-            asddasf
+            asddasf<div class="editButton" id="test">
+test div
+            </div>
             <div class="list">
 
             </div>
@@ -109,29 +111,34 @@
             if (data.class === "project") {
                 //console.log("open a dialog");
                 createDialogBox({
-                  x:data.x,
-                  y:data.y,
-                  id:data.id,
-                    items: [
-                    {
-                      "name":"Edit",
-                      "url":"",
-                      "class":"editButton"
-                    },{
-                      "name":"Delete",
-                      "url":"",
-                      "class":"deleteButton"
+                    x: data.x,
+                    y: data.y,
+                    id: data.id,
+                    items: [{
+                        "name": "Edit",
+                        "url": "",
+                        "class": "editButton"
+                    }, {
+                        "name": "Delete",
+                        "url": "",
+                        "class": "deleteButton"
                     }]
                 });
             }
+            jQuery(".editButton").each(function() {
+                jQuery(this).click(function() {
+                    var parentName = jQuery(this).parents(".project").html();
+                    var parentUrl = jQuery(this).parents(".project").attr('id');
+                    
+                    console.log(parentName+" - "+parentUrl);
+                });
+            });
         }, (errorMessage) => {
             console.log(errorMessage);
         });
     };
 
-    jQuery("editButton").on('click', ()=>{
 
-    })
 
 
     var app = require('electron').remote;

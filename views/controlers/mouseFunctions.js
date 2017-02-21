@@ -73,7 +73,7 @@ var destroyDialogBox = (className, event) => {
   return new Promise((resolve, reject) => {
     var toRemove = document.getElementsByClassName(className);
     if (toRemove.length > 0) {
-      console.log(event);
+      //  console.log(event);
       // console.log(toRemove);
       if (event.target.classList[0] != "contextMenu") {
         toRemove[0].parentNode.removeChild(toRemove[0]);
