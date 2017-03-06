@@ -1,6 +1,5 @@
-jQuery(".projectCreate").on("click", function() {
-
-  readAFile("./projects/projects-all.json").then((project) => {
+function createProjects(name, url, file) {
+  readAFile(file).then((project) => {
     if (project != '') {
       //console.log("ifProject");
       var proObj = JSON.parse(project);
@@ -9,8 +8,8 @@ jQuery(".projectCreate").on("click", function() {
     var newArray = [];
     var newObject = {};
     //console.log(proObj.menu.length);
-    var name = jQuery('input[name=projectName]').val();
-    var url = jQuery('input[name=projectUrl]').val();
+    // var name = jQuery('input[name=projectName]').val();
+    // var url = jQuery('input[name=projectUrl]').val();
 
     //console.log(name);
     if (!name) {
@@ -54,7 +53,7 @@ jQuery(".projectCreate").on("click", function() {
     //  console.log(writeObj);
     jQuery('.list').html(JSON.stringify(writeObj, undefined, 2));
 
-    writeFile("./projects/projects-all.json", JSON.stringify(writeObj,
+    writeFile(file, JSON.stringify(writeObj,
       undefined, 2)).then((reply) => {
       if (error) {
         alert(error);
@@ -77,4 +76,4 @@ jQuery(".projectCreate").on("click", function() {
     console.log(errorMessage);
   });
 
-});
+}

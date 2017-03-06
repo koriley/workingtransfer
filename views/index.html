@@ -132,6 +132,7 @@
 
 
     document.onmousedown = (e) => {
+
         rightClick(e).then((data) => {
             if (data.class === "project") {
                 //console.log("open a dialog");
@@ -150,13 +151,13 @@
                     }]
                 });
             }
-            jQuery(".editButton").each(function() {
-                jQuery(this).click(function() {
-                  var parentName = '';
-                  var parentUrl = '';
+
+                jQuery(".editButton").click(function() {
+                  var parentName = "";
+                  var parentUrl = "";
                      parentName = jQuery(this).parents(".project").attr("data-name");
                      parentUrl = jQuery(this).parents(".project").attr('data-url');
-                    jQuery(".newDialog").hide();
+                    destroyDialogBox("newDialog");
                     jQuery('input[name=projectNameEdit]').val(parentName);
                     jQuery('input[name=projectUrlEdit]').val(parentUrl);
                     jQuery('#editor').foundation('open');
@@ -174,18 +175,24 @@
                         readAFile("./projects/projects-all.json").then((project) => {
                         //  console.log(JSON.stringify(project,undefined,2));
                             objectUpdate(editObj, project);
+                            jQuery('#editor').foundation('close');
+
                         });
                     });
 
                     //console.log(parentName+" - "+parentUrl);
                 });
-            });
+
         }, (errorMessage) => {
             console.log(errorMessage);
         });
     };
 
-
+jQuery(".projectCreate").on("click", function() {
+  var name = jQuery('input[name=projectName]').val();
+  var url = jQuery('input[name=projectUrl]').val();
+  createProjects(name, url, "./projects/projects-all.json");
+});
 
 
     var app = require('electron').remote;

@@ -61,10 +61,14 @@ var createDialogBox = (obj) => {
     div.style.left = x + "px";
     div.style.display = "none"
     div.style.opacity = 0.1
+
+
     document.getElementById(parent).appendChild(div);
     //console.log(len);
+    //console.log(div);
     unfade(div);
-    resolve("cdb200");
+
+
 
   });
 }
