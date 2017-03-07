@@ -11,8 +11,8 @@ readAFile("./projects/projects-all.json").then((project) => {
     //console.log(length);
     for (var i = 0; i <= length; i++) {
       newHtml.push('<li class="project" data-url="' + proObj.menu[i].url +
-        '" data-name="' + proObj.menu[i].name + '" id="' + proObj.menu[i]
-        .url +
+        '" data-name="' + proObj.menu[i].name + '" id="' + proObj.menu[
+          i].url +
         '">' + proObj.menu[i].name + '</li>');
     }
   }
@@ -30,6 +30,4 @@ readAFile("./projects/projects-all.json").then((project) => {
   // });
 
 
-}, (errorMessage) => {
-  console.log(errorMessage);
 });

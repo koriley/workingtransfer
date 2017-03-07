@@ -44,14 +44,16 @@ function createProjects(name, url, file) {
       "name": name,
       "url": url
     });
-    newHtml.push('<li class="project">' + name + '</li>');
+    newHtml.push('<li class="project" data-url="' + url +
+      '" data-name="' + name + '" id="' + url +
+      '">' + name + '</li>');
     //console.log(newArray);
     writeObj = {
       "menu": newArray
     }
     JSON.stringify(writeObj, undefined, 2);
     //  console.log(writeObj);
-    jQuery('.list').html(JSON.stringify(writeObj, undefined, 2));
+    //jQuery('.list').html(JSON.stringify(writeObj, undefined, 2));
 
     writeFile(file, JSON.stringify(writeObj,
       undefined, 2)).then((reply) => {

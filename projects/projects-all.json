@@ -1,42 +1,16 @@
 {
   "menu": [
     {
-      "name": "sdfgre",
-      "url": "servd"
+      "name": "geekhouse",
+      "url": "www.thegeekhouse.com"
     },
     {
-      "name": "dfg66666456rth",
-      "url": "xrt"
+      "name": "aTest",
+      "url": "www.something.com"
     },
     {
-      "name": "kj",
-      "url": "bbuh"
-    },
-    {
-      "name": "sdfgre",
-      "url": "servd"
-    },
-    {
-      "name": "vf",
-      "url": "drg"
-    },
-    {
-      "name": "please",
-      "url": "se"
-    },
-    {
-      "name": "sutitup",
-      "url": "ERA"
-    },
-    {
-      "name": "fdv",
-      "url": "dfv"
-    },
-    {
-      "name": "is cool",
-      "url": "oriley"
+      "name": "another test",
+      "url": "www.test.com"
     }
-  ]
-}    }
   ]
 }

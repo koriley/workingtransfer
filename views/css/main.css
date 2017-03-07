@@ -51,9 +51,7 @@
     padding: 10px;
     border-radius: 17px; }
     .menuColumn .projects li:hover {
-      background: #01FBFE;
-      color: #051D29;
-      box-shadow: 0 0 10px 3px #01FBFE; }
+      text-shadow: 1px 1px 8px #01FBFE; }
   .menuColumn .create {
     list-style: none; }
     .menuColumn .create li h3 {

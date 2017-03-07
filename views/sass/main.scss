@@ -68,9 +68,10 @@ $contextMenuBGC:#F2F2F2;
         border-radius: 17px;
 
         &:hover {
-            background: $menuHighLight;
-            color: $menuColor;
-            box-shadow: 0 0 10px 3px $menuHighLight;
+          //  background: $menuHighLight;
+          //  color: $menuColor;
+          //  box-shadow: 0 0 10px 3px $menuHighLight;
+          text-shadow: 1px 1px 8px $menuHighLight;
         }
     }
 

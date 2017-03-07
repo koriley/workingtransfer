@@ -26,7 +26,7 @@ var rightClick = (event) => {
  * give it an object with an item array that has the name and url of the the list item.
  * Insteat of a url you can also pass javascript to run.
  *
- *  {x:12,y:43,items:[{name:edit, url:jQuery(".editDiv").show();}]}
+ *  {x:12,y:43,items:[{name:edit, class:a class name}]}
  */
 
 var createDialogBox = (obj) => {
@@ -73,12 +73,18 @@ var createDialogBox = (obj) => {
   });
 }
 
+/******************
+  Destroy the pop up context menu
+  className => The name of the context menu className
+  event => Generated object that is created
+*******************/
+
 var destroyDialogBox = (className, event) => {
   return new Promise((resolve, reject) => {
     var toRemove = document.getElementsByClassName(className);
     if (toRemove.length > 0) {
-      //  console.log(event);
-      // console.log(toRemove);
+      //console.log(event);
+      //console.log(toRemove);
       if (event.target.classList[0] != "contextMenu") {
         toRemove[0].parentNode.removeChild(toRemove[0]);
       }
