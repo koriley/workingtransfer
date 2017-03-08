@@ -133,9 +133,12 @@
 
     document.onmousedown = (e) => {
 //console.log(e);
-        rightClick(e).then((data) => {
+        clicker(e).then((data) => {
             if (data.class === "project") {
                 //console.log("open a dialog");
+              if(data.button === "left"){
+                console.log("left");
+              }else{
                 createDialogBox({
                     x: data.x,
                     y: data.y,
@@ -186,6 +189,8 @@
                 //console.log(parentName+" - "+parentUrl);
             });
 
+
+}
         }, (errorMessage) => {
             console.log(errorMessage);
         });

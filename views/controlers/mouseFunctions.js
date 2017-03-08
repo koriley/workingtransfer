@@ -1,26 +1,37 @@
-var rightClick = (event) => {
+var clicker = (event) => {
   return new Promise((resolve, reject) => {
     var clickType = event.which;
+    var button = "";
     if (clickType === 3) {
-      var x = event.clientX;
-      var y = event.clientY;
-
-      var id = (event.target || event.srcElement).id;
-      var myClass = (event.target || event.srcElement).className;
-      var proName = (event.srcElement).innerHTML;
-      resolve({
-        "x": x,
-        "y": y,
-        "id": id,
-        "class": myClass
-      });
+      button = "right";
     } else {
-      //lets look and see if any dialog boxes are floating around and kill them
+      button = "left";
       destroyDialogBox("newDialog", event);
-
     }
+
+
+    var x = event.clientX;
+    var y = event.clientY;
+
+    var id = (event.target || event.srcElement).id;
+    var myClass = (event.target || event.srcElement).className;
+    var proName = (event.srcElement).innerHTML;
+    resolve({
+      "x": x,
+      "y": y,
+      "id": id,
+      "class": myClass,
+      "button": button
+    });
+
+    //lets look and see if any dialog boxes are floating around and kill them
+
+
+
   });
 }
+
+
 
 /*
  * give it an object with an item array that has the name and url of the the list item.
